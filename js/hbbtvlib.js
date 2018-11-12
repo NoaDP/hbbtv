@@ -4,6 +4,7 @@
  *	<object id="oipfAppMan" type="application/oipfApplicationManager"></object>
  */
 var fullscreen = false;
+var pause = false;
 var j = 1;
 
 
@@ -107,18 +108,17 @@ function pressEnter (){
     document.addEventListener("keydown",fullscreenButton);
     loadAllJSON();
     
-    images();
-    loadAutor();
-    loadVisitas();
+    var videos = JSON.parse(localStorage.getItem("videoListStorage"));
+    images(videos);
+    loadAutor(videos);
+    loadVisitas(videos);
     //leerUsers(videos);
     //loadtitulo(videos);
-    //descripcion(j);
-   // loadtitle();
-
+    descripcion(videos,j);
  
 
     //activa el scroll abajo
-    var videos = JSON.parse(localStorage.getItem("videoListStorage"));
+   
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_DOWN ) {
             document.getElementById("Video" + j).style.backgroundColor = "white";
@@ -147,16 +147,45 @@ function pressEnter (){
     }, false);
 
 
-    //visualitza el video que es vol veure a la pantalla lateral
+    //ver en la pantalla lateral
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_ENTER) {
             document.getElementById("videoPlayer").innerHTML = "";
             document.getElementById("videoPlayer").type = "video/mpeg4";
-            document.getElementById("videoPlayer").data = videos.datos[j-1].Url;
-            document.getElementById("videoPlayer").play(1);
-            document.getElementById("view" + j).innerHTML = videos.datos[j - 1].Visitas + 1;
+            document.getElementById("videoPlayer").data = "https://github.com/Dualsix/json/raw/master/videos/" + videos.datos[j-1].Url;
+            document.getElementById("videoPlayer").play();
+            document.getElementById("view" + j).innerHTML = parseInt(document.getElementById("view" + j).innerHTML) + 1;
             //videos.datos[j].Visitas++;
-           // descripcion(j,j);
+            descripcion(videos,j);
+        };
+        e.preventDefault();
+    }, false);
+
+    // play del video 
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_RED && pause == true) {
+            pause = false;
+            document.getElementById("videoPlayer").childNodes[0].play();
+        };
+        e.preventDefault();
+    }, false);
+
+    //pausa el video
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_GREEN ) {
+            pause = true;
+            document.getElementById("videoPlayer").childNodes[0].pause();
+
+        };
+        e.preventDefault();
+    }, false);
+
+    //para el video 
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_YELLOW) {
+
+            document.getElementById("videoPlayer").stop();
+
         };
         e.preventDefault();
     }, false);
@@ -183,10 +212,24 @@ function destroyApp(app){
 function Fullscreen(){
     var video = document.getElementById("videoPlayer");
     if (fullscreen == false){
-
+       /* var video = document.createElement('object');
+        video.id="fullscreenVideo"
+        video.type = "video/broadcast";
+        video.position ="relative";
+        video.style.width = "1280px";
+        video.style.height = "720px";
+        video.bindToCurrentChannel();
+        document.body.appendChild(video);*/
        openFullscreen(video);
         fullscreen = true;
     }else{
+        /*var deleteV = document.getElementById("fullscreenVideo");
+        document.body.removeChild(deleteV);
+        var video = document.getElementById("videoPlayer");
+        video.type = "video/broadcast";
+        video.style.width = "350px";
+        video.style.height = "250px";
+        video.bindToCurrentChannel();*/
         closeFullscreen(video);
         fullscreen = false;
     }
