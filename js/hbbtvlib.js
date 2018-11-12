@@ -3,7 +3,9 @@
  * 
  *	<object id="oipfAppMan" type="application/oipfApplicationManager"></object>
  */
- var fullscreen = false;
+var fullscreen = false;
+var j = 1;
+
 
 function hbbtvlib_initialize(){
 	//should be called show() function, if not the application will not be shown;
@@ -96,7 +98,7 @@ function pressEnter (){
     video.style.width = "350px";
     video.style.height = "250px";
     video.bindToCurrentChannel();
-   // player.appendChild(video);
+    //player.appendChild(video);
 
     var fullscreenButton = function(e) {
         e.preventDefault();
@@ -104,10 +106,60 @@ function pressEnter (){
     };
     document.addEventListener("keydown",fullscreenButton);
     loadAllJSON();
+    
     images();
     loadAutor();
     loadVisitas();
-    loadtitulo();
+    //leerUsers(videos);
+    //loadtitulo(videos);
+    //descripcion(j);
+   // loadtitle();
+
+ 
+
+    //activa el scroll abajo
+    var videos = JSON.parse(localStorage.getItem("videoListStorage"));
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_DOWN ) {
+            document.getElementById("Video" + j).style.backgroundColor = "white";
+            if (j < videos.datos.length) {
+                j++;
+            }
+            document.getElementById("Video" + j).style.backgroundColor = "red";
+
+        };
+        e.preventDefault();
+    }, false);
+
+
+    //activa el scroll arriba
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_UP ) {
+
+            document.getElementById("Video" + j).style.backgroundColor = "white";
+            if (j > 1) {
+                j--;
+            }
+            document.getElementById("Video" + j).style.backgroundColor = "red";
+
+        };
+        e.preventDefault();
+    }, false);
+
+
+    //visualitza el video que es vol veure a la pantalla lateral
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == VK_ENTER) {
+            document.getElementById("videoPlayer").innerHTML = "";
+            document.getElementById("videoPlayer").type = "video/mpeg4";
+            document.getElementById("videoPlayer").data = videos.datos[j-1].Url;
+            document.getElementById("videoPlayer").play(1);
+            document.getElementById("view" + j).innerHTML = videos.datos[j - 1].Visitas + 1;
+            //videos.datos[j].Visitas++;
+           // descripcion(j,j);
+        };
+        e.preventDefault();
+    }, false);
 
 }
 
@@ -131,24 +183,10 @@ function destroyApp(app){
 function Fullscreen(){
     var video = document.getElementById("videoPlayer");
     if (fullscreen == false){
-       /* var video = document.createElement('object');
-        video.id="fullscreenVideo"
-        video.type = "video/broadcast";
-        video.position ="relative";
-        video.style.width = "1280px";
-        video.style.height = "720px";
-        video.bindToCurrentChannel();
-        document.body.appendChild(video);*/
+
        openFullscreen(video);
         fullscreen = true;
     }else{
-        /*var deleteV = document.getElementById("fullscreenVideo");
-        document.body.removeChild(deleteV);
-        var video = document.getElementById("videoPlayer");
-        video.type = "video/broadcast";
-        video.style.width = "350px";
-        video.style.height = "250px";
-        video.bindToCurrentChannel();*/
         closeFullscreen(video);
         fullscreen = false;
     }
