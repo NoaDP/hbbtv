@@ -4,9 +4,10 @@
  *	<object id="oipfAppMan" type="application/oipfApplicationManager"></object>
  */
 var fullscreen = false;
-var pause = false;
 var j = 1;
-
+var started = false;
+var dos = 0;
+var loaded = false;
 
 function hbbtvlib_initialize(){
 	//should be called show() function, if not the application will not be shown;
@@ -29,7 +30,7 @@ function hbbtvlib_initialize(){
 
 	var startButton = function(e) {
         e.preventDefault();
-        if (e.keyCode == VK_RED) pressStart();
+        if (e.keyCode == VK_RED && started == false) pressStart();
     };
     document.addEventListener("keydown",startButton);
 
@@ -71,20 +72,25 @@ function blue() {
 
 // al apretar el botón rojo en la primera pantalla, se muestra el contenido de la siguiente y se oculta el bloque de la primera pantalla
 function pressStart (){
+	started = true;
     $('#startBox').hide();
     $('#Sync').show();
     $('#OkBox').show();
     $('#syncNum').text(generateRandom());
-    var enterButton = function(e) {
-        e.preventDefault();
-        if (e.keyCode == VK_ENTER) pressEnter();
-    };
+    if(dos == 0){
+  	  var enterButton = function(e) {
+      	  e.preventDefault();
+      	  dos = 1;
+     	   if (e.keyCode == VK_ENTER) pressEnter();
+    	};
+    }
     document.addEventListener("keydown", enterButton);
 }
 
 
 //Escondemos lo relativo a la segunda ventana y mostramos lo referente al catalogo
 function pressEnter (){
+	dos = 1;
     $('#Sync').hide();
     $('#OkBox').hide();
     $('#videoPlayer').show();
@@ -93,40 +99,37 @@ function pressEnter (){
     $('#CatalogInfo').show();
     $('#navbar').show();
     document.body.style.background = "#f3f3f3 url('/img/background.png') no-repeat";
-   // var player = $('#VideoPlayer');
     var video = document.getElementById("videoPlayer");
     video.type = "video/broadcast";
     video.style.width = "350px";
     video.style.height = "250px";
     video.bindToCurrentChannel();
-    //player.appendChild(video);
 
     var fullscreenButton = function(e) {
         e.preventDefault();
         if (e.keyCode == VK_BLUE) Fullscreen();
     };
     document.addEventListener("keydown",fullscreenButton);
+
     loadAllJSON();
-    
     var videos = JSON.parse(localStorage.getItem("videoListStorage"));
     images(videos);
     loadAutor(videos);
     loadVisitas(videos);
-    //leerUsers(videos);
-    //loadtitulo(videos);
     descripcion(videos,j);
+    loadUsersJSON();
+    loadUsers();
  
 
     //activa el scroll abajo
-   
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_DOWN ) {
             document.getElementById("Video" + j).style.backgroundColor = "white";
             if (j < videos.datos.length) {
                 j++;
+                console.log(j);
             }
             document.getElementById("Video" + j).style.backgroundColor = "red";
-
         };
         e.preventDefault();
     }, false);
@@ -135,13 +138,12 @@ function pressEnter (){
     //activa el scroll arriba
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_UP ) {
-
             document.getElementById("Video" + j).style.backgroundColor = "white";
             if (j > 1) {
+                console.log(j);
                 j--;
             }
             document.getElementById("Video" + j).style.backgroundColor = "red";
-
         };
         e.preventDefault();
     }, false);
@@ -149,23 +151,25 @@ function pressEnter (){
 
     //ver en la pantalla lateral
     document.addEventListener("keydown", function (e) {
-        if (e.keyCode == VK_ENTER) {
+        if (e.keyCode == VK_ENTER && dos == 1) {
+            loaded = true;
+            updateViews(videos,j-1);
             document.getElementById("videoPlayer").innerHTML = "";
             document.getElementById("videoPlayer").type = "video/mpeg4";
             document.getElementById("videoPlayer").data = "https://github.com/Dualsix/json/raw/master/videos/" + videos.datos[j-1].Url;
             document.getElementById("videoPlayer").play();
-            document.getElementById("view" + j).innerHTML = parseInt(document.getElementById("view" + j).innerHTML) + 1;
-            //videos.datos[j].Visitas++;
-            descripcion(videos,j);
+            document.getElementById("view" + j).innerHTML = videos.datos[j-1].Visitas;
+
+            descripcion(videos,j-1);
         };
         e.preventDefault();
     }, false);
 
     // play del video 
     document.addEventListener("keydown", function (e) {
-        if (e.keyCode == VK_RED && pause == true) {
+        if (e.keyCode == VK_RED && started == true) {
             pause = false;
-            document.getElementById("videoPlayer").childNodes[0].play();
+            document.getElementById("videoPlayer").play(1);
         };
         e.preventDefault();
     }, false);
@@ -183,9 +187,7 @@ function pressEnter (){
     //para el video 
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_YELLOW) {
-
             document.getElementById("videoPlayer").stop();
-
         };
         e.preventDefault();
     }, false);
@@ -208,28 +210,13 @@ function destroyApp(app){
 }
 
 
-//variamos la imagen de los videos a fullscreen o a pequeño
+//variamos la imagen de los videos a fullscreen o pequeño
 function Fullscreen(){
     var video = document.getElementById("videoPlayer");
     if (fullscreen == false){
-       /* var video = document.createElement('object');
-        video.id="fullscreenVideo"
-        video.type = "video/broadcast";
-        video.position ="relative";
-        video.style.width = "1280px";
-        video.style.height = "720px";
-        video.bindToCurrentChannel();
-        document.body.appendChild(video);*/
        openFullscreen(video);
         fullscreen = true;
     }else{
-        /*var deleteV = document.getElementById("fullscreenVideo");
-        document.body.removeChild(deleteV);
-        var video = document.getElementById("videoPlayer");
-        video.type = "video/broadcast";
-        video.style.width = "350px";
-        video.style.height = "250px";
-        video.bindToCurrentChannel();*/
         closeFullscreen(video);
         fullscreen = false;
     }
@@ -238,9 +225,6 @@ function Fullscreen(){
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
-        var message = document.createElement('p');
-
-        elem.appendChild(message);
     } else {
         elem.mozRequestFullScreen();
     }
@@ -248,9 +232,13 @@ function openFullscreen(elem) {
 
 /* Close fullscreen */
 function closeFullscreen(elem) {
-    if (document.exitFullscreen) {
+    if (document.exitFullscreen && loaded==false) {
         document.exitFullscreen();
     }else{
         document.mozCancelFullScreen();
     }
+    if (loaded==true) {
+        elem.mozCancelFullScreen();
+    }
+
 }
