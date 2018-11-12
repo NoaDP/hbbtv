@@ -8,6 +8,7 @@ var j = 1;
 var started = false;
 var dos = 0;
 var loaded = false;
+var lastPage = false;
 
 function hbbtvlib_initialize(){
 	//should be called show() function, if not the application will not be shown;
@@ -81,7 +82,7 @@ function pressStart (){
   	  var enterButton = function(e) {
       	  e.preventDefault();
       	  dos = 1;
-     	   if (e.keyCode == VK_ENTER) pressEnter();
+     	   if (e.keyCode == VK_ENTER  && lastPage == false) pressEnter();
     	};
     }
     document.addEventListener("keydown", enterButton);
@@ -90,6 +91,7 @@ function pressStart (){
 
 //Escondemos lo relativo a la segunda ventana y mostramos lo referente al catalogo
 function pressEnter (){
+    lastPage = true;
 	dos = 1;
     $('#Sync').hide();
     $('#OkBox').hide();
@@ -108,6 +110,7 @@ function pressEnter (){
     var fullscreenButton = function(e) {
         e.preventDefault();
         if (e.keyCode == VK_BLUE) Fullscreen();
+
     };
     document.addEventListener("keydown",fullscreenButton);
 
@@ -119,16 +122,19 @@ function pressEnter (){
     descripcion(videos,j);
     loadUsersJSON();
     loadUsers();
- 
+    document.getElementById("Video1").style.backgroundColor = "red";
+
 
     //activa el scroll abajo
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_DOWN ) {
             document.getElementById("Video" + j).style.backgroundColor = "white";
-            if (j < videos.datos.length) {
-                j++;
-                console.log(j);
+            j++;
+            if (j>=6){
+                j=5;
             }
+            console.log(j);
+
             document.getElementById("Video" + j).style.backgroundColor = "red";
         };
         e.preventDefault();
@@ -139,9 +145,10 @@ function pressEnter (){
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == VK_UP ) {
             document.getElementById("Video" + j).style.backgroundColor = "white";
-            if (j > 1) {
-                console.log(j);
-                j--;
+            j--;
+            console.log(j);
+            if (j<=0){
+                j=1;
             }
             document.getElementById("Video" + j).style.backgroundColor = "red";
         };
@@ -159,7 +166,6 @@ function pressEnter (){
             document.getElementById("videoPlayer").data = "https://github.com/Dualsix/json/raw/master/videos/" + videos.datos[j-1].Url;
             document.getElementById("videoPlayer").play();
             document.getElementById("view" + j).innerHTML = videos.datos[j-1].Visitas;
-
             descripcion(videos,j-1);
         };
         e.preventDefault();
@@ -232,10 +238,12 @@ function openFullscreen(elem) {
 
 /* Close fullscreen */
 function closeFullscreen(elem) {
-    if (document.exitFullscreen) {
+    if (document.exitFullscreen && loaded==false) {
         document.exitFullscreen();
-    }else if (document.mozCancelFullScreen) { /* Firefox */
+    }else if (document.mozCancelFullScreen && loaded == false) { /* Firefox */
         document.mozCancelFullScreen();
     }
+    if(loaded) {
 
+    }
 }
