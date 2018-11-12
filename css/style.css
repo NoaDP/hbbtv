@@ -66,6 +66,7 @@ body {
 
 #CatalogList{
     background-color: ghostwhite;
+    left: -5%;
 }
 .flex-container img{
     width: 10%;
@@ -125,7 +126,13 @@ body {
     text-align: center;
 }
 
+#blocLeft{
+    border: solid;
+    border-color:black;
+}
 
-
+#imagen1,#imagen2,#imagen3,#imagen4,#imagen5{
+   left:15%;
+}
 
 

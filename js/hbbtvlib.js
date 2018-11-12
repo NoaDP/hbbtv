@@ -232,13 +232,10 @@ function openFullscreen(elem) {
 
 /* Close fullscreen */
 function closeFullscreen(elem) {
-    if (document.exitFullscreen && loaded==false) {
+    if (document.exitFullscreen) {
         document.exitFullscreen();
-    }else{
+    }else if (document.mozCancelFullScreen) { /* Firefox */
         document.mozCancelFullScreen();
-    }
-    if (loaded==true) {
-        elem.mozCancelFullScreen();
     }
 
 }
