@@ -100,7 +100,7 @@ function pressEnter (){
     $('#blocRight').show();
     $('#CatalogInfo').show();
     $('#navbar').show();
-    document.body.style.background = "#f3f3f3 url('/img/background.png') no-repeat";
+    document.body.style.background = "#f3f3f3 url('https://raw.githubusercontent.com/NoaDP/hbbtv/master/img/background.png') no-repeat";
     var video = document.getElementById("videoPlayer");
     video.type = "video/broadcast";
     video.style.width = "350px";
