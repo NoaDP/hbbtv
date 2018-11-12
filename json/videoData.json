@@ -6,7 +6,7 @@
       "Author": "Jimmy",
       "List": "Season2",
       "Url": "haiw.mp4",
-      "ImgUrl": "/img/aiw.JPG",
+      "ImgUrl": "https://raw.githubusercontent.com/NoaDP/hbbtv/master/img/aiw.JPG",
       "Visitas": "10",
       "Titulo": "How to Make EAT ME CAKES & DRINK ME POTION, Alice in Wonderland Feast of Fiction"
     },
@@ -26,7 +26,7 @@
       "Author": "Feast of Fiction",
       "List": "Season6",
       "Url": "hotel.mp4",
-      "ImgUrl": "/img/hotel.JPG",
+      "ImgUrl": "https://raw.githubusercontent.com/NoaDP/hbbtv/master/img/hotel.JPG",
       "Visitas": "10",
       "Titulo": "Scream Cheese cake from Hotel Transylvania HAPPY HALLOWEEN"
     },
@@ -36,7 +36,7 @@
       "Author": "Jimmy",
       "List": "Season3",
       "Url": "ramen.mp4",
-      "ImgUrl": "/img/ramen.JPG",
+      "ImgUrl": "https://raw.githubusercontent.com/NoaDP/hbbtv/master/img/ramen.JPG",
       "Visitas": "10",
       "Titulo": "NARUTO ICHIRAKU RAMEN"
     },
@@ -46,7 +46,7 @@
       "Author": "Feast of Fiction",
       "List": "Season5",
       "Url": "choco.mp4",
-      "ImgUrl": "/img/choco.JPG",
+      "ImgUrl": "https://raw.githubusercontent.com/NoaDP/hbbtv/master/img/choco.JPG",
       "Visitas": "10",
       "Titulo": "How To Make the Chocolate Covered Checkerboard Cake from Food Wars Shokugeki No Soma"
     }
