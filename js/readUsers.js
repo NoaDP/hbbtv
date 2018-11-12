@@ -3,7 +3,7 @@
  */
 function loadUsersJSON()
 {
-    var url = "https://raw.githubusercontent.com/Dualsix/json/master/json/Usuarios.json";
+    var url = "https://raw.githubusercontent.com/NoaDP/hbbtv/master/json/Usuarios.json";
 
     var xmlhttp = new XMLHttpRequest();
 

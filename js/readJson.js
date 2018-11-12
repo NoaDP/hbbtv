@@ -3,7 +3,7 @@
  */
 function loadAllJSON()
 {
-    var url = "https://raw.githubusercontent.com/Dualsix/json/master/videoData.json";
+    var url = "https://raw.githubusercontent.com/NoaDP/hbbtv/master/json/videoData.json";
 
     var xmlhttp = new XMLHttpRequest();
 
