@@ -5,50 +5,50 @@
       "Name": "How to Make EAT ME CAKES & DRINK ME POTION, Alice in Wonderland Feast of Fiction",
       "Author": "Jimmy",
       "List": "Season2",
-      "Url": "https://github.com/Dualsix/json/raw/master/videos/aiw.mp4",
-      "ImgUrl": "https://github.com/Dualsix/json/raw/master/img/aiw.JPG",
+      "Url": "https://github.com/Dualsix/json/blob/master/videos/aiw.mp4",
+      "ImgUrl": "/img/aiw.jpg",
       "Visitas": "10",
-      "Titulo": "How to Make EAT ME CAKES & DRINK ME POTION, Alice in Wonderland Feast of Fiction"
+      "Titulo":"How to Make EAT ME CAKES & DRINK ME POTION, Alice in Wonderland"
     },
     {
       "Nombre": "How to Make RATATOUILLE! Disney Pixar",
       "Name": "How to Make RATATOUILLE! Disney Pixar",
       "Author": "Feast of Fiction",
       "List": "Season2",
-      "Url": "https://github.com/Dualsix/json/raw/master/videos/rata.mp4",
-      "ImgUrl": "https://github.com/Dualsix/json/raw/master/img/rata.JPG",
+      "Url": "https://github.com/Dualsix/json/blob/master/videos/rata.mp4",
+      "ImgUrl": "/img/rata.jpg",
       "Visitas": "10",
-      "Titulo": "How to Make RATATOUILLE Disney Pixar"
+      "Titulo":"How to Make RATATOUILLE Disney Pixar"
     },
     {
       "Nombre": "Scream Cheese (cake) from Hotel Transylvania! HAPPY HALLOWEEN",
       "Name": "Scream Cheese (cake) from Hotel Transylvania! HAPPY HALLOWEEN",
       "Author": "Feast of Fiction",
       "List": "Season6",
-      "Url": "https://github.com/Dualsix/json/raw/master/videos/hotel.mp4",
-      "ImgUrl": "https://github.com/Dualsix/json/raw/master/img/hotel.JPG",
+      "Url": "https://github.com/Dualsix/json/blob/master/videos/hotel.mp4",
+      "ImgUrl": "/img/hotel.jpg",
       "Visitas": "10",
-      "Titulo": "Scream Cheese cake from Hotel Transylvania HAPPY HALLOWEEN"
+      "Titulo":"Scream Cheese (cake) from Hotel Transylvania"
     },
     {
       "Nombre": "NARUTO ICHIRAKU RAMEN",
       "Name": "NARUTO ICHIRAKU RAMEN",
       "Author": "Feast of Fiction",
       "List": "Jimmy",
-      "Url": "https://github.com/Dualsix/json/raw/master/videos/ramen.mp4",
-      "ImgUrl": "https://github.com/Dualsix/json/raw/master/img/ramen.JPG",
+      "Url": "https://github.com/Dualsix/json/blob/master/videos/ramen.mp4",
+      "ImgUrl": "/img/ramen.jpg",
       "Visitas": "10",
-      "Titulo": "NARUTO ICHIRAKU RAMEN"
+      "Titulo":"NARUTO ICHIRAKU RAMEN"
     },
     {
       "Nombre": "How To Make the Chocolate Covered Checkerboard Cake from Food Wars! Shokugeki No Soma",
       "Name": "How To Make the Chocolate Covered Checkerboard Cake from Food Wars! Shokugeki No Soma",
       "Author": "Feast of Fiction",
       "List": "Season5",
-      "Url": "https://github.com/Dualsix/json/raw/master/videos/choco.mp4",
-      "ImgUrl": "https://github.com/Dualsix/json/raw/master/img/choco.JPG",
+      "Url": "https://github.com/Dualsix/json/blob/master/videos/choco.mp4",
+      "ImgUrl": "/img/choco.jpg",
       "Visitas": "10",
-      "Titulo": "How To Make the Chocolate Covered Checkerboard Cake from Food Wars Shokugeki No Soma"
+      "Titulo":"How To Make the Chocolate Covered Checkerboard Cake from Shokugeki No Soma"
     }
   ]
 }
